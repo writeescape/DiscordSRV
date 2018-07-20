@@ -79,6 +79,13 @@ public class PlayerJoinLeaveListener implements Listener {
         // if enabled, set the player's discord nickname as their ign
         String discordId = DiscordSRV.getPlugin().getAccountLinkManager().getDiscordId(event.getPlayer().getUniqueId());
         User discordUser = discordId == null ? null : DiscordUtil.getUserById(discordId);
+        
+        if(discordUser != null){
+          String SyncCmd = "pex user %username% group set %discordtoprole%"; 
+          String finalCommand = SyncCmd.replace("%username%", DiscordUtil.escapeMarkdown(event.getPlayer().getName())).replace("%discordtoprole%", DiscordUtil.getTopRole(DiscordUtil.getMemberById(discordId)).getName());
+          Bukkit.getScheduler().scheduleSyncDelayedTask(DiscordSRV.getPlugin(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));           
+        }
+        
         if (discordUser != null && DiscordSRV.config().getBoolean("MinecraftDiscordAccountLinkedSetDiscordNicknameAsInGameName"))
             if (!DiscordSRV.getPlugin().getMainGuild().getMember(discordUser).getEffectiveName().equals(event.getPlayer().getName()))
                 DiscordUtil.setNickname(DiscordSRV.getPlugin().getMainGuild().getMember(discordUser), event.getPlayer().getName());
