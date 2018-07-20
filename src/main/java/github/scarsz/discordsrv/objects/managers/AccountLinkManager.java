@@ -123,6 +123,7 @@ public class AccountLinkManager {
                     .replace("%minecraftuuid%", uuid.toString())
                     .replace("%discordid%", discordId)
                     .replace("%discordname%", DiscordUtil.getUserById(discordId).getName())
+                    .replace("%discordtoprole", DiscordUtil.getTopRole(DiscordUtil.getMemberById(discordId)).getName())
                     .replace("%discorddisplayname%", DiscordSRV.getPlugin().getMainGuild().getMember(DiscordUtil.getUserById(discordId)).getEffectiveName())
             ;
 
