@@ -86,9 +86,6 @@ public class PlayerJoinLeaveListener implements Listener {
           Bukkit.getScheduler().scheduleSyncDelayedTask(DiscordSRV.getPlugin(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));           
         }
         
-        if (discordUser != null && DiscordSRV.config().getBoolean("MinecraftDiscordAccountLinkedSetDiscordNicknameAsInGameName"))
-            if (!DiscordSRV.getPlugin().getMainGuild().getMember(discordUser).getEffectiveName().equals(event.getPlayer().getName()))
-                DiscordUtil.setNickname(DiscordSRV.getPlugin().getMainGuild().getMember(discordUser), event.getPlayer().getName());
     }
 
     @EventHandler //priority needs to be different to MONITOR to avoid problems with permissions check when PEX is used
