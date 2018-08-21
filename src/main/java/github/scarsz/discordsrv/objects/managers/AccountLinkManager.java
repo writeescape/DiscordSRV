@@ -132,15 +132,6 @@ public class AccountLinkManager {
             String finalCommand = command;
             Bukkit.getScheduler().scheduleSyncDelayedTask(DiscordSRV.getPlugin(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand));
         }
-
-        // add user to role
-        Role roleToAdd = DiscordUtil.getRole(DiscordSRV.getPlugin().getMainGuild(), DiscordSRV.config().getString("MinecraftDiscordAccountLinkedRoleNameToAddUserTo"));
-        if (roleToAdd != null) DiscordUtil.addRolesToMember(DiscordUtil.getMemberById(discordId), roleToAdd);
-        else DiscordSRV.debug("Couldn't add user to null role");
-
-        // set user's discord nickname as their in-game name
-        if (DiscordSRV.config().getBoolean("MinecraftDiscordAccountLinkedSetDiscordNicknameAsInGameName"))
-            DiscordUtil.setNickname(DiscordUtil.getMemberById(discordId), Bukkit.getOfflinePlayer(uuid).getName());
     }
 
     public void unlink(UUID uuid) {
